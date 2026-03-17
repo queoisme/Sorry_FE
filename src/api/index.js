@@ -1,4 +1,6 @@
-const BASE_URL = '/api'
+const BASE_URL = import.meta.env.DEV
+  ? '/api'
+  : 'https://demosorry-production.up.railway.app/api'
 
 const handleResponse = async (res) => {
   if (!res.ok) {

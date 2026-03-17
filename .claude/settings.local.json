@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "WebFetch(domain:demosorry-production.up.railway.app)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(del \"D:\\\\Demo_AppSory_Fe\\\\.git\\\\index.lock\")"
     ]
   }
 }
