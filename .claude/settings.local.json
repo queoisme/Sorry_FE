@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:demosorry-production.up.railway.app)",
+      "Bash(npm install:*)"
+    ]
+  }
+}
