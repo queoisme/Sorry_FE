@@ -4,7 +4,7 @@ import {
   Image, Music, Upload, Trash2, Plus, X, Youtube,
   Play, Pause, FileAudio, Film, ChevronRight,
   LayoutGrid, List, Search, RefreshCw, ExternalLink,
-  Smile, FileText, Clock, HardDrive
+  Smile, FileText, Clock, HardDrive, Menu
 } from 'lucide-react'
 import { mediaApi, musicApi } from './api/index.js'
 
@@ -65,13 +65,13 @@ function MediaUploadModal({ onClose, onSuccess }) {
   }
 
   return (
-    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-gray-900 border border-gray-700 rounded-2xl w-full max-w-md shadow-2xl">
-        <div className="flex items-center justify-between p-6 border-b border-gray-700">
-          <h2 className="text-xl font-semibold text-white flex items-center gap-2"><Upload size={20} className="text-sky-400" /> Upload Image</h2>
-          <button onClick={onClose} className="text-gray-400 hover:text-white transition-colors"><X size={20} /></button>
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
+      <div className="bg-gray-900 border border-gray-700 rounded-t-2xl sm:rounded-2xl w-full sm:max-w-md shadow-2xl">
+        <div className="flex items-center justify-between p-4 sm:p-6 border-b border-gray-700">
+          <h2 className="text-lg sm:text-xl font-semibold text-white flex items-center gap-2"><Upload size={20} className="text-sky-400" /> Upload Image</h2>
+          <button onClick={onClose} className="text-gray-400 hover:text-white transition-colors p-1"><X size={20} /></button>
         </div>
-        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+        <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-4">
           <div
             onClick={() => fileRef.current.click()}
             onDragOver={(e) => e.preventDefault()}
@@ -140,11 +140,11 @@ function MusicUploadModal({ onClose, onSuccess }) {
   }
 
   return (
-    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-gray-900 border border-gray-700 rounded-2xl w-full max-w-md shadow-2xl">
-        <div className="flex items-center justify-between p-6 border-b border-gray-700">
-          <h2 className="text-xl font-semibold text-white flex items-center gap-2"><Music size={20} className="text-purple-400" /> Add Music</h2>
-          <button onClick={onClose} className="text-gray-400 hover:text-white transition-colors"><X size={20} /></button>
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
+      <div className="bg-gray-900 border border-gray-700 rounded-t-2xl sm:rounded-2xl w-full sm:max-w-md shadow-2xl">
+        <div className="flex items-center justify-between p-4 sm:p-6 border-b border-gray-700">
+          <h2 className="text-lg sm:text-xl font-semibold text-white flex items-center gap-2"><Music size={20} className="text-purple-400" /> Add Music</h2>
+          <button onClick={onClose} className="text-gray-400 hover:text-white transition-colors p-1"><X size={20} /></button>
         </div>
         <div className="flex border-b border-gray-700">
           <button onClick={() => setTab('file')} className={`flex-1 py-3 text-sm font-medium transition-colors ${tab === 'file' ? 'text-purple-400 border-b-2 border-purple-400' : 'text-gray-500 hover:text-gray-300'}`}>
@@ -154,7 +154,7 @@ function MusicUploadModal({ onClose, onSuccess }) {
             <Youtube size={14} className="inline mr-1.5" />YouTube
           </button>
         </div>
-        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+        <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-4">
           {tab === 'file' ? (
             <>
               <div onClick={() => fileRef.current.click()} className="border-2 border-dashed border-gray-600 hover:border-purple-500 rounded-xl p-6 text-center cursor-pointer transition-colors group">
@@ -225,17 +225,17 @@ function MediaSection() {
   )
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-start sm:items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white">Media Library</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-white">Media Library</h1>
           <p className="text-gray-400 text-sm mt-0.5">{items.length} items</p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 w-full sm:w-auto">
           <button onClick={load} className="p-2 bg-gray-800 hover:bg-gray-700 text-gray-400 hover:text-white rounded-lg transition-colors"><RefreshCw size={16} /></button>
           <button onClick={() => setViewMode(v => v === 'grid' ? 'list' : 'grid')} className="p-2 bg-gray-800 hover:bg-gray-700 text-gray-400 hover:text-white rounded-lg transition-colors">{viewMode === 'grid' ? <List size={16} /> : <LayoutGrid size={16} />}</button>
-          <button onClick={() => setShowUpload(true)} className="flex items-center gap-2 bg-sky-600 hover:bg-sky-500 text-white px-4 py-2 rounded-lg font-medium transition-colors text-sm"><Plus size={16} /> Upload</button>
+          <button onClick={() => setShowUpload(true)} className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-sky-600 hover:bg-sky-500 text-white px-4 py-2 rounded-lg font-medium transition-colors text-sm"><Plus size={16} /> Upload</button>
         </div>
       </div>
 
@@ -256,7 +256,7 @@ function MediaSection() {
           <p className="text-gray-500">No media items found</p>
         </div>
       ) : viewMode === 'grid' ? (
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4">
           {filtered.map(item => (
             <div key={item.id} className="group relative bg-gray-800 rounded-xl overflow-hidden border border-gray-700 hover:border-sky-500 transition-all hover:shadow-lg hover:shadow-sky-500/10">
               <div className="aspect-square bg-gray-900 flex items-center justify-center overflow-hidden relative">
@@ -275,12 +275,13 @@ function MediaSection() {
                   <Film size={32} className="text-gray-600" />
                 </div>
               </div>
-              <div className="p-3">
+              <div className="p-2 sm:p-3">
                 <p className="text-white text-xs font-medium truncate">{item.caption || item.fileName || 'Untitled'}</p>
                 {item.emojis && <p className="text-sm mt-0.5">{item.emojis}</p>}
                 <p className="text-gray-500 text-xs mt-1">{formatFileSize(item.fileSize)}</p>
               </div>
-              <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity flex gap-1">
+              {/* Action buttons - always visible on mobile, hover-revealed on desktop */}
+              <div className="absolute top-2 right-2 flex gap-1 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
                 {item.fileUrl && <a href={item.fileUrl} target="_blank" rel="noopener noreferrer" className="p-1.5 bg-gray-900/80 hover:bg-gray-700 text-gray-300 hover:text-white rounded-lg transition-colors"><ExternalLink size={12} /></a>}
                 <button onClick={() => handleDelete(item.id)} disabled={deleting === item.id} className="p-1.5 bg-gray-900/80 hover:bg-red-600 text-gray-300 hover:text-white rounded-lg transition-colors">
                   {deleting === item.id ? <RefreshCw size={12} className="animate-spin" /> : <Trash2 size={12} />}
@@ -292,21 +293,22 @@ function MediaSection() {
       ) : (
         <div className="space-y-2">
           {filtered.map(item => (
-            <div key={item.id} className="flex items-center gap-4 bg-gray-800 border border-gray-700 hover:border-sky-500 rounded-xl p-4 transition-all group">
-              <div className="w-12 h-12 rounded-lg bg-gray-900 flex-shrink-0 overflow-hidden flex items-center justify-center">
+            <div key={item.id} className="flex items-center gap-3 sm:gap-4 bg-gray-800 border border-gray-700 hover:border-sky-500 rounded-xl p-3 sm:p-4 transition-all group">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-gray-900 flex-shrink-0 overflow-hidden flex items-center justify-center">
                 {item.fileUrl ? <img src={item.fileUrl} alt={item.fileName} className="w-full h-full object-cover" onError={e => { e.target.style.display='none' }} /> : <Image size={20} className="text-gray-600" />}
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-white font-medium truncate">{item.caption || item.fileName || 'Untitled'}</p>
-                <div className="flex items-center gap-3 mt-0.5">
+                <p className="text-white font-medium truncate text-sm sm:text-base">{item.caption || item.fileName || 'Untitled'}</p>
+                <div className="flex items-center gap-2 sm:gap-3 mt-0.5 flex-wrap">
                   <span className="text-gray-500 text-xs flex items-center gap-1"><HardDrive size={11} />{formatFileSize(item.fileSize)}</span>
-                  <span className="text-gray-500 text-xs flex items-center gap-1"><Clock size={11} />{formatDate(item.createdAt)}</span>
+                  <span className="text-gray-500 text-xs hidden sm:flex items-center gap-1"><Clock size={11} />{formatDate(item.createdAt)}</span>
                   {item.emojis && <span className="text-sm">{item.emojis}</span>}
                 </div>
               </div>
-              <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                {item.fileUrl && <a href={item.fileUrl} target="_blank" rel="noopener noreferrer" className="p-2 hover:bg-gray-700 text-gray-400 hover:text-white rounded-lg transition-colors"><ExternalLink size={14} /></a>}
-                <button onClick={() => handleDelete(item.id)} disabled={deleting === item.id} className="p-2 hover:bg-red-600 text-gray-400 hover:text-white rounded-lg transition-colors">
+              {/* Action buttons - always visible on mobile */}
+              <div className="flex gap-1 sm:gap-2 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+                {item.fileUrl && <a href={item.fileUrl} target="_blank" rel="noopener noreferrer" className="p-1.5 sm:p-2 hover:bg-gray-700 text-gray-400 hover:text-white rounded-lg transition-colors"><ExternalLink size={14} /></a>}
+                <button onClick={() => handleDelete(item.id)} disabled={deleting === item.id} className="p-1.5 sm:p-2 hover:bg-red-600 text-gray-400 hover:text-white rounded-lg transition-colors">
                   {deleting === item.id ? <RefreshCw size={14} className="animate-spin" /> : <Trash2 size={14} />}
                 </button>
               </div>
@@ -385,16 +387,16 @@ function MusicSection() {
   )
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-start sm:items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white">Music Library</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-white">Music Library</h1>
           <p className="text-gray-400 text-sm mt-0.5">{items.length} tracks</p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 w-full sm:w-auto">
           <button onClick={load} className="p-2 bg-gray-800 hover:bg-gray-700 text-gray-400 hover:text-white rounded-lg transition-colors"><RefreshCw size={16} /></button>
-          <button onClick={() => setShowUpload(true)} className="flex items-center gap-2 bg-purple-600 hover:bg-purple-500 text-white px-4 py-2 rounded-lg font-medium transition-colors text-sm"><Plus size={16} /> Add Music</button>
+          <button onClick={() => setShowUpload(true)} className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-purple-600 hover:bg-purple-500 text-white px-4 py-2 rounded-lg font-medium transition-colors text-sm"><Plus size={16} /> Add Music</button>
         </div>
       </div>
 
@@ -425,16 +427,17 @@ function MusicSection() {
                 isExpanded ? 'bg-gray-800 border-red-500/60' :
                 'bg-gray-800 border-gray-700 hover:border-purple-500'
               }`}>
-                <div className="flex items-center gap-4 p-4">
-                  <div className="flex-shrink-0 w-10 text-center">
+                <div className="flex items-center gap-2 sm:gap-4 p-3 sm:p-4">
+                  {/* Track number - hidden on very small screens */}
+                  <div className="hidden xs:flex flex-shrink-0 w-8 sm:w-10 text-center">
                     <span className="text-gray-600 text-sm font-mono">{String(idx + 1).padStart(2, '0')}</span>
                   </div>
 
-                  {/* Thumbnail YouTube hoặc nút play */}
+                  {/* Thumbnail YouTube or play button */}
                   {item.isFromYoutube && ytId ? (
                     <button
                       onClick={() => togglePlay(item)}
-                      className="w-16 h-10 rounded-lg overflow-hidden flex-shrink-0 relative group/thumb"
+                      className="w-14 h-9 sm:w-16 sm:h-10 rounded-lg overflow-hidden flex-shrink-0 relative group/thumb"
                     >
                       <img
                         src={`https://img.youtube.com/vi/${ytId}/mqdefault.jpg`}
@@ -448,7 +451,7 @@ function MusicSection() {
                   ) : (
                     <button
                       onClick={() => togglePlay(item)}
-                      className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${
+                      className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${
                         playing === item.id ? 'bg-purple-500 hover:bg-purple-400' : 'bg-gray-700 hover:bg-purple-600'
                       }`}
                     >
@@ -457,25 +460,26 @@ function MusicSection() {
                   )}
 
                   <div className="flex-1 min-w-0">
-                    <p className="text-white font-medium truncate">{item.title || item.fileName || 'Untitled'}</p>
-                    <div className="flex items-center gap-3 mt-0.5 flex-wrap">
+                    <p className="text-white font-medium truncate text-sm sm:text-base">{item.title || item.fileName || 'Untitled'}</p>
+                    <div className="flex items-center gap-2 sm:gap-3 mt-0.5 flex-wrap">
                       {item.isFromYoutube ? (
                         <span className="text-red-400 text-xs flex items-center gap-1"><Youtube size={11} />YouTube</span>
                       ) : (
                         <span className="text-gray-500 text-xs flex items-center gap-1"><HardDrive size={11} />{formatFileSize(item.fileSize)}</span>
                       )}
-                      <span className="text-gray-500 text-xs flex items-center gap-1"><Clock size={11} />{formatDate(item.createdAt)}</span>
+                      <span className="text-gray-500 text-xs hidden sm:flex items-center gap-1"><Clock size={11} />{formatDate(item.createdAt)}</span>
                     </div>
                   </div>
 
-                  <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  {/* Action buttons - always visible on mobile */}
+                  <div className="flex gap-1 sm:gap-2 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
                     {item.isFromYoutube && item.youtubeUrl && (
-                      <a href={item.youtubeUrl} target="_blank" rel="noopener noreferrer" className="p-2 hover:bg-gray-700 text-gray-400 hover:text-red-400 rounded-lg transition-colors"><ExternalLink size={14} /></a>
+                      <a href={item.youtubeUrl} target="_blank" rel="noopener noreferrer" className="p-1.5 sm:p-2 hover:bg-gray-700 text-gray-400 hover:text-red-400 rounded-lg transition-colors"><ExternalLink size={14} /></a>
                     )}
                     {item.fileUrl && !item.isFromYoutube && (
-                      <a href={item.fileUrl} target="_blank" rel="noopener noreferrer" className="p-2 hover:bg-gray-700 text-gray-400 hover:text-white rounded-lg transition-colors"><ExternalLink size={14} /></a>
+                      <a href={item.fileUrl} target="_blank" rel="noopener noreferrer" className="p-1.5 sm:p-2 hover:bg-gray-700 text-gray-400 hover:text-white rounded-lg transition-colors"><ExternalLink size={14} /></a>
                     )}
-                    <button onClick={() => handleDelete(item.id)} disabled={deleting === item.id} className="p-2 hover:bg-red-600 text-gray-400 hover:text-white rounded-lg transition-colors">
+                    <button onClick={() => handleDelete(item.id)} disabled={deleting === item.id} className="p-1.5 sm:p-2 hover:bg-red-600 text-gray-400 hover:text-white rounded-lg transition-colors">
                       {deleting === item.id ? <RefreshCw size={14} className="animate-spin" /> : <Trash2 size={14} />}
                     </button>
                   </div>
@@ -483,7 +487,7 @@ function MusicSection() {
 
                 {/* YouTube embed */}
                 {item.isFromYoutube && ytId && isExpanded && (
-                  <div className="px-4 pb-4">
+                  <div className="px-3 pb-3 sm:px-4 sm:pb-4">
                     <div className="rounded-xl overflow-hidden aspect-video">
                       <iframe
                         src={`https://www.youtube.com/embed/${ytId}?autoplay=1`}
@@ -508,13 +512,27 @@ function MusicSection() {
 // ---- MAIN APP ----
 export default function App() {
   const [activeSection, setActiveSection] = useState('media')
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+
+  const navigate = (section) => {
+    setActiveSection(section)
+    setSidebarOpen(false)
+  }
 
   return (
     <div className="min-h-screen bg-gray-950 flex">
       <Toaster position="top-right" toastOptions={{ style: { background: '#1f2937', color: '#f9fafb', border: '1px solid #374151' } }} />
 
+      {/* Mobile overlay */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/60 z-30 md:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
-      <aside className="w-64 bg-gray-900 border-r border-gray-800 flex flex-col">
+      <aside className={`fixed md:static inset-y-0 left-0 z-40 w-64 bg-gray-900 border-r border-gray-800 flex flex-col transition-transform duration-300 ease-in-out ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0`}>
         {/* Logo */}
         <div className="p-6 border-b border-gray-800">
           <div className="flex items-center gap-3">
@@ -537,7 +555,7 @@ export default function App() {
           ].map(({ id, label, icon: Icon, color, bg }) => (
             <button
               key={id}
-              onClick={() => setActiveSection(id)}
+              onClick={() => navigate(id)}
               className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all text-sm font-medium ${
                 activeSection === id
                   ? `${bg} ${color} border border-current/20`
@@ -561,10 +579,43 @@ export default function App() {
       </aside>
 
       {/* Main content */}
-      <main className="flex-1 overflow-auto">
-        <div className="max-w-6xl mx-auto p-8">
-          {activeSection === 'media' && <MediaSection />}
-          {activeSection === 'music' && <MusicSection />}
+      <main className="flex-1 overflow-auto flex flex-col min-w-0">
+        {/* Mobile header */}
+        <div className="md:hidden flex items-center gap-3 px-4 py-3 bg-gray-900 border-b border-gray-800 sticky top-0 z-20">
+          <button
+            onClick={() => setSidebarOpen(true)}
+            className="p-2 text-gray-400 hover:text-white rounded-lg hover:bg-gray-800 transition-colors"
+          >
+            <Menu size={20} />
+          </button>
+          <div className="flex items-center gap-2">
+            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-sky-500 to-purple-600 flex items-center justify-center">
+              <Film size={14} className="text-white" />
+            </div>
+            <span className="text-white font-bold">AppSory</span>
+          </div>
+          {/* Section tabs on mobile header */}
+          <div className="ml-auto flex gap-1">
+            {[
+              { id: 'media', icon: Image, color: 'text-sky-400' },
+              { id: 'music', icon: Music, color: 'text-purple-400' },
+            ].map(({ id, icon: Icon, color }) => (
+              <button
+                key={id}
+                onClick={() => navigate(id)}
+                className={`p-2 rounded-lg transition-colors ${activeSection === id ? `${color} bg-gray-800` : 'text-gray-500 hover:text-gray-300'}`}
+              >
+                <Icon size={18} />
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex-1 p-4 sm:p-6 lg:p-8">
+          <div className="max-w-6xl mx-auto">
+            {activeSection === 'media' && <MediaSection />}
+            {activeSection === 'music' && <MusicSection />}
+          </div>
         </div>
       </main>
     </div>
